@@ -1,14 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
+import { Link } from 'expo-router';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
-import Button from './component/Button';
-import Input from './component/Input';
+import Button from '../component/Button';
+import Input from '../component/Input';
+import { useNavigation } from 'expo-router';
 
 
 export default function App() {
+  const navigation = useNavigation()
+    const handleHome = () => {
+        navigation.navigate('(home)')
+    }
   return (
     <View style={styles.container}>
 
-      <Image source={require('./assets/logo.png')} style={styles.logo} resizeMode="strecth" />
+      <Image source={require('../assets/logo.png')} style={styles.logo} resizeMode="strecth" />
+      {/* <Text>Nyoba nich</Text> */}
       
       <TextInput 
         style={styles.input} 
@@ -24,9 +31,13 @@ export default function App() {
         secureTextEntry={true} 
       />
 
-      <Button text="Login" />
-      <Input text="Notes" />
+      
+      {/* <Input text="Notes" /> */}
 
+      <Button text="Login" onPress={handleHome}/>
+      <Text style={styles.dontHaveAccount}>Don't have account? <Link href="/register" style={styles.register}>Register here</Link> </Text>
+      {/* <Link href="/(home)" style={styles.linkToHome}>Masuk</Link> */}
+      
       <StatusBar style="auto"/>
     </View>
   );
@@ -74,5 +85,18 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  register: {
+    color: '#19918F',
+  },
+  dontHaveAccount: {
+    marginTop: 10,
+    alignSelf:"flex-start",
+  },
+  linkToHome: {
+    marginTop: 10,
+    color: '#fff',
+    alignSelf:"flex-start",
+    backgroundColor: '#19918f',
   },
 });
