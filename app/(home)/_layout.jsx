@@ -1,11 +1,12 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-// import FontAwesome6 from '@expo/vector-icons/FontAwesome6'; 
-import Feather from '@expo/vector-icons/Feather';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6'; 
+// import Feather from '@expo/vector-icons/Feather';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { Tabs } from 'expo-router';
 
 export default function TabLayout() {
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: 'blue' }}>
+    <Tabs screenOptions={{ tabBarActiveTintColor: '#19918F' }}>
       <Tabs.Screen
         name="index"
         options={{
@@ -17,14 +18,14 @@ export default function TabLayout() {
         name="transfer"
         options={{
           title: 'transfer',
-          tabBarIcon: ({ color }) => <Feather size={28} name="send" color={color} />,
+          tabBarIcon: ({ color }) => <FontAwesome6 size={28} name="money-bill-transfer" color={color} />,
         }}
       />
       <Tabs.Screen
         name="topup"
         options={{
           title: 'topup',
-          tabBarIcon: ({ color }) => <Feather size={28} name="plus" color={color} />,
+          tabBarIcon: ({ color }) => <Ionicons size={28} name="wallet" color={color} />,
         }}
       />
     </Tabs>

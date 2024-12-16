@@ -1,9 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { Link } from 'expo-router';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Modal, Pressable } from 'react-native';
 import Button from '../component/Button';
 import Input from '../component/Input';
 import { useNavigation } from 'expo-router';
+import Checkbox from 'expo-checkbox';
+import { useState } from 'react';
 
 
 export default function App() {
@@ -11,9 +13,11 @@ export default function App() {
     const handleRegister = () => {
         navigation.navigate('index')
     }
+    const [isChecked, setChecked] = useState(false)
+    const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.container}>
-
+      
       <Image source={require('../assets/logo.png')} style={styles.logo} resizeMode="strecth" />
       
       <TextInput 
@@ -42,6 +46,19 @@ export default function App() {
         placeholderTextColor="#aaa" 
         keyboardType='url' 
       />
+      <View style={styles.tnc}>
+        <Checkbox
+          style={styles.checkbox}
+          value={isChecked}
+          onValueChange={setChecked}
+          color={isChecked ? '#19918F' : undefined}
+        />
+        <Text style={styles.haveAccount}>I have read and agree to the 
+          <Link href="/tnc" style={styles.login}>
+            <Text style={{color:"#19918F"}}>Terms and conditions</Text>
+          </Link> 
+        </Text>
+      </View>
 
       
       {/* <Input text="Notes" /> */}
@@ -99,9 +116,48 @@ const styles = StyleSheet.create({
   },
   login: {
     color: '#19918F',
+    paddingLeft: 2,
   },
   haveAccount: {
-    marginTop: 10,
+    marginTop: 7,
     alignSelf: "flex-start",
+  },
+  checkbox: {
+    margin: 7,
+  },
+  tnc: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "strecth"
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalText: {
+    marginBottom: 10,
+    textAlign: 'justify',
+  },
+  noAccount: {
+    marginRight: 2,
+    paddingHorizontal: 6,
+    paddingVertical: 5,
+    alignSelf: 'flex-start',
   },
 });
